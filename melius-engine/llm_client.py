@@ -13,6 +13,10 @@ class LLMClient:
         self.api_keys = [k for k in self.api_keys if k]
         # Updated models list based on user request
         self.models = [
+            "qwen/qwen3-coder:free"
+            "stepfun/step-3.5-flash:free"
+            "nvidia/nemotron-3-nano-30b-a3b:free"
+            "qwen/qwen3-next-80b-a3b-instruct:free"
             "arcee-ai/trinity-large-preview:free",
             "liquid/lfm-2.5-1.2b-thinking:free",
             "tngtech/tng-r1t-chimera:free",
