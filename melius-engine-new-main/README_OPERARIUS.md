@@ -46,7 +46,18 @@ Store this JSON in a basket named `melius_instructions`:
 - **Form Integration**: Using `{form}...{/form}` automatically creates a submission basket in your Pantry and registers it in `melius_forms`.
 - **Holidays**: If the AI detects a holiday like New Year, it can add wishes or specific offers defined in instructions.
 
-## 4. How to Use
-1. Set your `PANTRY_ID`.
-2. Update the `melius_instructions` basket in your Pantry.
-3. Run the engine. It will automatically update your UI files or create new pages as requested.
+## 5. Required Environment Variables / GitHub Secrets
+Add these to your **GitHub Settings > Secrets and variables > Actions > Repository secrets**:
+
+- `PANTRY_ID`: Your unique Pantry ID from https://getpantry.cloud/.
+- `OPENROUTER_API_KEY_1`: Your primary OpenRouter API key.
+- `OPENROUTER_API_KEY_2`: (Optional) Fallback API key.
+- `OPENROUTER_API_KEY_3`: (Optional) Fallback API key.
+- `OPENROUTER_API_KEY_4`: (Optional) Fallback API key.
+- `OPENROUTER_API_KEY_5`: (Optional) Fallback API key.
+
+## 6. Vercel Deployment
+The `test-website` folder is ready for Vercel.
+1. Connect your repository to Vercel.
+2. Set the **Root Directory** to `melius-engine-new-main/test-website`.
+3. Vercel will automatically use the `vercel.json` configuration.
