@@ -72,7 +72,7 @@ graph TD
 -   `to-do/`: Pending tasks or improvements.
 -   `error/`: Persistent errors that need manual attention or a retry.
 -   `history/`: Numbered JSON files containing chat history with the LLM for each session.
--   `test-website/`: A multi-page test application (Home, About, Contact) for validating UI modifications.
+-   `test-website/`: A multi-page test application (Home, About, Contact) for validating UI modifications..
 
 ---
 
