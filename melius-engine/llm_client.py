@@ -13,8 +13,8 @@ class LLMClient:
         self.api_keys = [k for k in self.api_keys if k]
         # Fixed models list with proper commas
         self.models = [
-            "qwen/qwen3-coder:free",
-            "qwen/qwen3-4b:free",
+            "openchat/openchat-7b:free",
+            "arcee-ai/trinity-large-preview:free",
             "arcee-ai/trinity-large-preview:free",
             "qwen/qwen3-4b:free",
             "openchat/openchat-7b:free",
