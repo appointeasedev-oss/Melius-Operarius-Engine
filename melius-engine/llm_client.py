@@ -14,7 +14,7 @@ class LLMClient:
         # Fixed models list with proper commas
         self.models = [
             "qwen/qwen3-coder:free",
-            "stepfun/step-3.5-flash:free",
+            "qwen/qwen3-4b:free",
             "arcee-ai/trinity-large-preview:free",
             "qwen/qwen3-4b:free",
             "openchat/openchat-7b:free",
