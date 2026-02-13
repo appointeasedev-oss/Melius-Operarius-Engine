@@ -1,0 +1,10 @@
+{
+  "name": "marcus-aurelius-static-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Simple static HTML/CSS/JS tribute page for Marcus Aurelius.",
+  "scripts": {
+    "build": "echo 'Static site: no build step required'",
+    "start": "python -m http.server 4173"
+  }
+}

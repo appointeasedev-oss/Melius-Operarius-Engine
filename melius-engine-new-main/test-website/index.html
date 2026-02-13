@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explore the mysteries of black holes, their formation, types, and effects on the universe."
+    />
+    <title>Black Hole Explorer | Cosmic Wonders</title>
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  </head>
+  <body>
+    <header class="hero" id="top">
+      <nav class="mobile-nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-toggle" id="mobile-menu" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <ul class="nav-menu" role="menu" aria-label="Navigation links">
+          <li class="nav-item" role="none">
+            <a href="#top" class="nav-link" role="menuitem" tabindex="0">Home</a>
+          </li>
+          <li class="nav-item" role="none">
+            <a href="#formation" class="nav-link" role="menuitem" tabindex="0">Formation</a>
+          </li>
+          <li class="nav-item" role="none">
+            <a href="#types" class="nav-link" role="menuitem" tabindex="0">Types</a>
+          </li>
+          <li class="nav-item" role="none">
+            <a href="#effects" class="nav-link" role="menuitem" tabindex="0">Effects</a>
+          </li>
+          <li class="nav-item" role="none">
+            <a href="#contact" class="nav-link" role="menuitem" tabindex="0">Contact</a>
+          </li>
+        </ul>
+      </nav>
+      <p class="eyebrow" role="doc-subtitle">Cosmic • Mysterious • Infinite</p>
+      <h1>Black Hole Explorer</h1>
+      <p class="subtitle">Journey into the Heart of the Universe</p>
+      <button id="quote-btn" type="button" aria-controls="quote-text" aria-label="Show another quote" class="quote-btn">Show another quote</button>
+      <div class="black-hole-decorations">
+        <div class="event-horizon">⚫</div>
+        <div class="event-horizon">⚫</div>
+        <div class="event-horizon">⚫</div>
+        <div class="accretion-disk">🌀</div>
+        <div class="stellar-remnant">💫</div>
+      </div>
+      <!-- Black Hole-themed header additions -->
+      <div class="black-hole-header">
+        <div class="black-hole-greeting">Welcome to the Cosmic Frontier</div>
+        <div class="black-hole-icons">
+          <div class="black-hole-icon">⚫</div>
+          <div class="black-hole-icon">🌀</div>
+          <div class="black-hole-icon">💫</div>
+          <div class="black-hole-icon">🌌</div>
+          <div class="black-hole-icon">🔭</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container" role="main">
+      <!-- Animated Slides Section -->
+      <section class="card" aria-labelledby="black-hole-slides">
+        <h2 id="black-hole-slides">Black Hole Slides</h2>
+        <p>
+          Explore the fascinating world of black holes through our interactive animated slides. 
+          Learn about their formation, different types, and their profound effects on the universe.
+        </p>
+        <div class="slide-container">
+          <div class="slide-navigation">
+            <button id="prev-slide" class="slide-btn" aria-label="Previous slide">‹</button>
+            <div class="slide-indicator">
+              <span id="current-slide">1</span> / <span id="total-slides">3</span>
+            </div>
+            <button id="next-slide" class="slide-btn" aria-label="Next slide">›</button>
+          </div>
+          <div class="slide-content" id="slide-content">
+            <!-- Slides will be dynamically inserted here -->
+          </div>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="formation">
+        <h2 id="formation">Formation of Black Holes</h2>
+        <p>
+          Black holes are formed through the gravitational collapse of massive stars. 
+          When a star with a mass greater than about 20 times that of our Sun exhausts its nuclear fuel, 
+          it can no longer support itself against its own gravity and collapses under its own weight.
+        </p>
+        <ul>
+          <li><strong>Stellar Collapse:</strong> The core of the star collapses while the outer layers are blown away in a supernova explosion.</li>
+          <li><strong>Singularity Formation:</strong> The core continues to collapse until it becomes a singularity, a point of infinite density.</li>
+          <li><strong>Event Horizon:</strong> The boundary around the singularity from which nothing can escape, not even light.</li>
+          <li><strong>Types of Formation:</strong> Black holes can also form from the direct collapse of gas clouds or through the merger of smaller black holes.</li>
+        </ul>
+      </section>
+
+      <section class="card" aria-labelledby="types">
+        <h2 id="types">Types of Black Holes</h2>
+        <p>
+          There are several types of black holes, each with unique characteristics and formation processes. 
+          Understanding these types helps us comprehend the diversity of these cosmic phenomena.
+        </p>
+        <ul>
+          <li><strong>Stellar Black Holes:</strong> Formed from the collapse of massive stars, typically 5-100 times the mass of our Sun.</li>
+          <li><strong>Supermassive Black Holes:</strong> Found at the centers of galaxies, with masses millions to billions of times of our Sun.</li>
+          <li><strong>Intermediate Black Holes:</strong> A hypothetical class with masses between stellar and supermassive black holes.</li>
+          <li><strong>Primordial Black Holes:</strong> Theoretical black holes that may have formed in the early universe shortly after the Big Bang.</li>
+        </ul>
+      </section>
+
+      <section class="card timeline" aria-labelledby="effects">
+        <h2 id="effects">Effects of Black Holes</h2>
+        <p>
+          Black holes have profound effects on their surroundings and the universe at large. 
+          Their immense gravitational pull influences the behavior of nearby matter and light.
+        </p>
+        <ul>
+          <li><strong>Gravitational Lensing:</strong> Black holes bend the path of light, creating distorted images of objects behind them.</li>
+          <li><strong>Time Dilation:</strong> Time slows down near a black hole due to its intense gravitational field.</li>
+          <li><strong>Accretion Disks:</strong> Matter spiraling into a black hole forms a hot, glowing disk that emits X-rays.</li>
+          <li><strong>Gravitational Waves:</strong> Mergers of black holes produce ripples in spacetime, detectable by observatories like LIGO.</li>
+        </ul>
+      </section>
+
+      <!-- Additional interactive sections with buttons -->
+      <section class="card" aria-labelledby="black-hole-booking">
+        <h2 id="black-hole-booking">Explore Further</h2>
+        <p>Ready to dive deeper into the mysteries of black holes? Explore our resources and tools!</p>
+        <div class="booking-buttons">
+          <button type="button" class="action-btn" aria-label="Access research papers" data-action="research">Research Papers</button>
+          <button type="button" class="action-btn" aria-label="View simulations" data-action="simulations">Simulations</button>
+          <button type="button" class="action-btn" aria-label="Join webinars" data-action="webinars">Webinars</button>
+        </div>
+      </section>
+
+      <section class="card" aria-labelledby="black-hole-contact">
+        <h2 id="black-hole-contact">Connect with Experts</h2>
+        <p>Have questions or want to discuss black holes? Our team of astrophysicists is here to help!</p>
+        <div class="contact-buttons">
+          <button type="button" class="contact-btn" aria-label="Send us a message" data-action="message">Send Message</button>
+          <button type="button" class="contact-btn" aria-label="Join discussion forum" data-action="forum">Discussion Forum</button>
+          <button type="button" class="contact-btn" aria-label="View FAQs" data-action="faqs">FAQs</button>
+        </div>
+      </section>
+    </main>
+
+    <footer role="contentinfo">
+      <p>Black Hole Explorer - Unveiling the Universe's Secrets</p>
+      <a href="#top" class="back-to-top">Back to top ↑</a>
+      <!-- Black Hole-themed footer additions -->
+      <div class="black-hole-footer">
+        <div class="black-hole-wishes">Keep Exploring the Cosmos</div>
+        <div class="black-hole-scarab">⚫</div>
+        <div class="black-hole-footer-decorations">
+          <div class="black-hole-event-horizon">⚫</div>
+          <div class="black-hole-accretion-disk">🌀</div>
+          <div class="black-hole-stellar-remnant">💫</div>
+          <div class="black-hole-wave">🌌</div>
+          <div class="black-hole-sun">🔭</div>
+          <div class="black-hole-umbrella">🛰️</div>
+          <div class="black-hole-seagull">📡</div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      // Add event listeners for all buttons
+      document.addEventListener('DOMContentLoaded', function() {
+        // Navigation menu toggle
+        const navToggle = document.getElementById('mobile-menu');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        navToggle.addEventListener('click', function() {
+          navMenu.classList.toggle('active');
+          navToggle.setAttribute('aria-expanded', navMenu.classList.contains('active'));
+        });
+
+        // Quote button
+        const quoteBtn = document.getElementById('quote-btn');
+        const quotes = [
+          'The black holes of nature are the most perfect macroscopic objects there are in the universe: the only elements in their construction are our concepts of space and time.',
+          'Black holes are where God divided by zero.',
+          'A black hole is a region of spacetime where gravity is so strong that nothing—no particles or even electromagnetic radiation such as light—can escape from it.',
+          'The event horizon is the point of no return; once crossed, the black hole's gravity is too strong to escape.',
+          'Black holes are the most efficient engines in the universe, converting mass into energy with near-perfect efficiency.'
+        ];
+        
+        quoteBtn.addEventListener('click', function() {
+          const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+          const quoteText = document.createElement('div');
+          quoteText.id = 'quote-text';
+          quoteText.textContent = randomQuote;
+          quoteText.className = 'quote-text';
+          
+          // Remove existing quote text
+          const existingQuote = document.getElementById('quote-text');
+          if (existingQuote) {
+            existingQuote.remove();
+          }
+          
+          // Add new quote text after the button
+          quoteBtn.parentNode.insertBefore(quoteText, quoteBtn.nextSibling);
+        });
+
+        // Booking buttons
+        const bookingButtons = document.querySelectorAll('.action-btn');
+        bookingButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            const action = this.getAttribute('data-action');
+            console.log(`Booking action: ${action}`);
+            // Add your booking logic here
+            alert(`Accessing ${action}...`);
+          });
+        });
+
+        // Contact buttons
+        const contactButtons = document.querySelectorAll('.contact-btn');
+        contactButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            const action = this.getAttribute('data-action');
+            console.log(`Contact action: ${action}`);
+            // Add your contact logic here
+            alert(`Accessing ${action}...`);
+          });
+        });
+
+        // Back to top button
+        const backToTop = document.querySelector('.back-to-top');
+        backToTop.addEventListener('click', function() {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+
+        // Slide navigation
+        const slideContainer = document.querySelector('.slide-container');
+        const prevSlide = document.getElementById('prev-slide');
+        const nextSlide = document.getElementById('next-slide');
+        const currentSlide = document.getElementById('current-slide');
+        const totalSlides = document.getElementById('total-slides');
+        const slideContent = document.getElementById('slide-content');
+
+        const slides = [
+          {
+            title: 'Formation of Black Holes',
+            content: 'Black holes are formed through the gravitational collapse of massive stars. When a star with a mass greater than about 20 times that of our Sun exhausts its nuclear fuel, it can no longer support itself against its own gravity and collapses under its own weight.',
+            image: '🌀'
+          },
+          {
+            title: 'Types of Black Holes',
+            content: 'There are several types of black holes, each with unique characteristics and formation processes. Understanding these types helps us comprehend the diversity of these cosmic phenomena.',
+            image: '⚫'
+          },
+          {
+            title: 'Effects of Black Holes',
+            content: 'Black holes have profound effects on their surroundings and the universe at large. Their immense gravitational pull influences the behavior of nearby matter and light.',
+            image: '💫'
+          }
+        ];
+
+        let currentSlideIndex = 0;
+        totalSlides.textContent = slides.length;
+
+        function showSlide(index) {
+          const slide = slides[index];
+          slideContent.innerHTML = `
+            <div class="slide">
+              <h3>${slide.title}</h3>
+              <p>${slide.content}</p>
+              <div class="slide-image">${slide.image}</div>
+            </div>
+          `;
+          currentSlide.textContent = index + 1;
+        }
+
+        prevSlide.addEventListener('click', function() {
+          currentSlideIndex = (currentSlideIndex - 1 + slides.length) % slides.length;
+          showSlide(currentSlideIndex);
+        });
+
+        nextSlide.addEventListener('click', function() {
+          currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+          showSlide(currentSlideIndex);
+        });
+
+        showSlide(currentSlideIndex);
+      });
+    </script>
+  </body>
+</html>

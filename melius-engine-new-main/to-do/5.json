@@ -1,0 +1,4 @@
+{
+  "file": "test-website/script.js",
+  "pending": "Fix the syntax error by removing the word 'pe\u0142ni' and re-implement the mobile menu toggle functionality with proper event handling, smooth transitions, and user-friendly interactions as described in the intent"
+}
