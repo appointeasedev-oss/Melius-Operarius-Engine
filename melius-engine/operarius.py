@@ -39,7 +39,6 @@ class MeliusOperarius:
             for file in files:
                 rel_path = os.path.relpath(os.path.join(root, file), self.root_dir)
                 all_files.append(rel_path)
-                # Read content for synchronization check
                 content = self.read_file(rel_path)
                 if content:
                     file_contents[rel_path] = content
@@ -53,7 +52,6 @@ class MeliusOperarius:
         return None
 
     def write_file(self, file_path, content):
-        # Restriction: Only modify UI files
         ui_extensions = [".tsx", ".css", ".html", ".js", ".ts", ".jsx"]
         if not any(file_path.endswith(ext) for ext in ui_extensions):
             return False
@@ -69,7 +67,6 @@ class MeliusOperarius:
             print("PANTRY_ID not found. Melius Operarius requires a Pantry ID.")
             return
 
-        # 1. Fetch Instructions
         instructions = self.get_pantry_data("melius_instructions")
         if not instructions:
             print("No instructions found in Pantry. Initializing default...")
@@ -88,53 +85,54 @@ class MeliusOperarius:
             }
             self.post_pantry_data("melius_instructions", instructions)
 
-        # 2. Prepare Context and Check Synchronization
         all_files, file_contents = self.get_all_files()
         current_date = datetime.datetime.now().strftime("%Y-%m-%d")
         is_new_year = "01-01" in current_date or "12-31" in current_date
         
         system_prompt = f"""
         You are Melius Operarius, an expert AI Web Programmer.
-        Your goal is to ensure the website is ALWAYS synchronized with the Pantry instructions.
+        MISSION: Ensure the website matches the Pantry instructions.
         
-        CURRENT DATE: {current_date}
-        IS NEW YEAR PERIOD: {is_new_year}
+        DATE: {current_date}
+        IS NEW YEAR: {is_new_year}
         PANTRY_ID: {self.pantry_id}
         
-        INSTRUCTIONS FROM PANTRY:
+        PANTRY INSTRUCTIONS:
         {json.dumps(instructions, indent=2)}
         
-        CURRENT WEBSITE FILES AND CONTENT:
+        WEBSITE FILES:
         {json.dumps(file_contents, indent=2)}
 
-        CORE MISSION:
-        1. SYNCHRONIZATION: Compare the current files with the instructions. If the site does NOT match the theme, content, or special tags in the Pantry, you MUST update it.
-        2. THEME: Apply colors from Pantry. If New Year, add festive elements.
-        3. CONTENT: Improve user text (e.g., 2 columns for comparisons).
-        4. STRICT TEXT: Use 'strict_text' EXACTLY.
-        5. SPECIAL TAGS: Implement {{form}}, {{countdown}}, {{live_time}}, etc.
-        6. FORMS: Generate unique Pantry buckets for each {{form}} and register in 'melius_forms'.
+        RULES:
+        1. Compare files with instructions. If mismatch, update.
+        2. THEME: Only modify colors/themes.
+        3. CONTENT: AI can improve formatting (e.g. 2 columns).
+        4. STRICT TEXT: MUST use 'strict_text' EXACTLY.
+        5. TAGS: Implement {{form}}, {{countdown}}, {{live_time}}, etc.
+        6. FORMS: Generate unique Pantry buckets for each {{form}}.
         
-        OUTPUT FORMAT (Strict JSON):
+        CRITICAL: If the current website content does not reflect the instructions above, you MUST set "needs_update": true.
+        
+        OUTPUT FORMAT (JSON):
         {{
           "needs_update": true/false,
           "modifications": [
-            {{ "path": "path/to/file", "description": "Why this update is needed for sync", "type": "edit" }},
-            {{ "path": "path/to/new_page.html", "content": "Full HTML content", "type": "new" }}
+            {{ "path": "path/to/file", "description": "sync required", "type": "edit" }}
           ],
-          "new_forms": [
-            {{ "form_id": "id", "bucket_name": "bucket" }}
-          ]
+          "new_forms": []
         }}
         """
 
-        plan = self.client.chat(system_prompt)
+        try:
+            plan = self.client.chat(system_prompt)
+        except Exception as e:
+            print(f"AI failed to generate plan: {e}")
+            return
         
         if not plan.get("needs_update", False):
-            print("Website is already synchronized with Pantry. No changes needed.")
+            print("Website is synchronized with Pantry.")
             return
 
-        # 3. Handle Form Registry
         new_forms = plan.get("new_forms", [])
         if new_forms:
             forms_registry = self.get_pantry_data("melius_forms") or {"forms": []}
@@ -148,31 +146,18 @@ class MeliusOperarius:
                     })
             self.post_pantry_data("melius_forms", forms_registry)
 
-        # 4. Execute Modifications
         for mod in plan.get("modifications", []):
             if mod["type"] == "new":
                 self.write_file(mod["path"], mod["content"])
-                print(f"Created new page: {mod['path']}")
             elif mod["type"] == "edit":
                 current_content = self.read_file(mod["path"])
-                edit_prompt = f"""
-                Update {mod['path']} to synchronize with Pantry.
-                Reason: {mod['description']}
-                
-                Current Content:
-                {current_content}
-                
-                Respond ONLY with the full new content in JSON:
-                {{ "new_content": "..." }}
-                """
-                edit_result = self.client.chat(edit_prompt)
-                new_content = edit_result.get("new_content")
-                if new_content:
-                    self.write_file(mod["path"], new_content)
-                    print(f"Updated file for sync: {mod['path']}")
+                edit_prompt = f"Update {mod['path']} for sync: {mod['description']}\nContent:\n{current_content}\nRespond with JSON: {{'new_content': '...'}}"
+                try:
+                    edit_result = self.client.chat(edit_prompt)
+                    new_content = edit_result.get("new_content")
+                    if new_content:
+                        self.write_file(mod["path"], new_content)
+                except Exception as e:
+                    print(f"Failed to edit {mod['path']}: {e}")
 
-        print("Melius Operarius synchronization complete.")
-
-if __name__ == "__main__":
-    engine = MeliusOperarius()
-    engine.run()
+        print("Melius Operarius sync complete.")

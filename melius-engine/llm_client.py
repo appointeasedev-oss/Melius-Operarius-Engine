@@ -11,18 +11,17 @@ class LLMClient:
             os.getenv(f"OPENROUTER_API_KEY_{i}") for i in range(1, 6)
         ]
         self.api_keys = [k for k in self.api_keys if k]
-        # Updated models list based on user request
+        # Fixed models list with proper commas
         self.models = [
-            "qwen/qwen3-coder:free"
-            "stepfun/step-3.5-flash:free"
-            "nvidia/nemotron-3-nano-30b-a3b:free"
-            "qwen/qwen3-next-80b-a3b-instruct:free"
-            "arcee-ai/trinity-large-preview:free",
-            "liquid/lfm-2.5-1.2b-thinking:free",
-            "tngtech/tng-r1t-chimera:free",
-            "qwen/qwen3-next-80b-a3b-instruct:free",
-            "qwen/qwen3-coder:free",
-            "nousresearch/hermes-3-llama-3.1-405b:free"
+            "qwen/qwen-32b-chat:free",
+            "google/gemini-2.0-flash-exp:free",
+            "google/gemini-2.0-pro-exp-02-05:free",
+            "mistralai/mistral-7b-instruct:free",
+            "openchat/openchat-7b:free",
+            "qwen/qwen-2.5-72b-instruct:free",
+            "deepseek/deepseek-chat:free",
+            "meta-llama/llama-3.1-8b-instruct:free",
+            "qwen/qwen-2-7b-instruct:free"
         ]
         # Use numbered history files to avoid confusion
         history_dir = os.path.join(self.root_dir, "history")
@@ -38,6 +37,7 @@ class LLMClient:
     def chat(self, prompt):
         self.history.append({"role": "user", "content": prompt})
         
+        last_error = ""
         for key in self.api_keys:
             for model in self.models:
                 try:
@@ -74,16 +74,18 @@ class LLMClient:
                         self.save_history()
                         return json_content
                     else:
-                        print(f"Error with model {model}: {response.text}")
+                        last_error = f"Error with model {model}: {response.text}"
+                        print(last_error)
                 except Exception as e:
-                    print(f"Exception with model {model}: {e}")
+                    last_error = f"Exception with model {model}: {e}"
+                    print(last_error)
                 time.sleep(1)
         
         # Fallback for testing environment if no API keys are provided
         if not self.api_keys:
-             mock_response = {"analysis": "Mock analysis", "files_to_read": [], "improvements": []}
+             mock_response = {"needs_update": False, "modifications": [], "analysis": "Mock analysis (No API Keys)"}
              self.history.append({"role": "assistant", "content": json.dumps(mock_response)})
              self.save_history()
              return mock_response
 
-        raise Exception("All API keys and models failed.")
+        raise Exception(f"All API keys and models failed. Last error: {last_error}")
