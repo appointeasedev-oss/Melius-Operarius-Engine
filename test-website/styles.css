@@ -1,6 +1,6 @@
 :root {
-    --primary-color: #00d4ff;
-    --secondary-color: #0055ff;
+    --primary-color: #7b2cff;
+    --secondary-color: #00f0ff;
     --background-color: #121212;
     --text-color: #ffffff;
 }
@@ -17,13 +17,148 @@ body {
 header {
     border-bottom: 2px solid var(--primary-color);
     margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    padding: 1rem;
+    border-radius: 12px;
 }
 
 #app {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(123, 44, 255, 0.2);
+}
+
+#hero {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+#hero h2 {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(123, 44, 255, 0.5);
+}
+
+#hero p {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.sales-banner {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+.countdown-timer {
+    color: var(--secondary-color);
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.product-banner {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid rgba(123, 44, 255, 0.3);
+    margin: 2rem 0;
+}
+
+.product-info h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.product-info p {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.product-price {
+    color: var(--secondary-color);
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.buy-button {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(123, 44, 255, 0.3);
+}
+
+.buy-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(123, 44, 255, 0.4);
+}
+
+footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+    #hero h2 {
+        font-size: 2rem;
+    }
+    
+    .sales-banner {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .countdown-timer {
+        font-size: 1.1rem;
+    }
+    
+    .product-banner {
+        padding: 1.5rem;
+    }
+    
+    .product-info h3 {
+        font-size: 1.5rem;
+    }
+    
+    .product-price {
+        font-size: 1.5rem;
+    }
+    
+    .buy-button {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
 }
