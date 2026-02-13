@@ -13,7 +13,7 @@ function updateCountdown() {
     const countdownElement = document.querySelector('.countdown');
     if (!countdownElement) return;
     
-    const targetDate = new Date('2026-06-30T00:00:00');
+    const targetDate = new Date('2026-07-01T00:00:00');
     const now = new Date();
     const diff = targetDate - now;
     
