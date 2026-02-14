@@ -104,7 +104,7 @@ footer p {
 }
 
 .product-item .price {
-    color: #f97316;
+    color: var(--primary-color);
     font-weight: bold;
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
@@ -112,7 +112,7 @@ footer p {
 
 .contact-link {
     display: inline-block;
-    background: #f97316;
+    background: var(--primary-color);
     color: white;
     text-decoration: none;
     padding: 0.5rem 1rem;
@@ -150,11 +150,11 @@ footer p {
 
 .form-group input:focus {
     outline: none;
-    border-color: #f97316;
+    border-color: var(--primary-color);
 }
 
 button[type="submit"] {
-    background: #f97316;
+    background: var(--primary-color);
     color: white;
     border: none;
     padding: 0.75rem 1.5rem;
@@ -185,8 +185,8 @@ button[type="submit"]:hover {
 
 .countdown-numbers span {
     background: rgba(249, 115, 22, 0.2);
-    border: 1px solid #f97316;
-    color: #f97316;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
     padding: 0.5rem 1rem;
     border-radius: 5px;
     font-weight: bold;
