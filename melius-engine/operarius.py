@@ -76,29 +76,25 @@ class MeliusOperarius:
         current_date = datetime.datetime.now().strftime("%Y-%m-%d")
         is_new_year = "01-01" in current_date or "12-31" in current_date
         
-        base_prompt = """
-        You are the Melius Operarius AI Programmer. Your goal is to build and maintain a professional, high-quality website based on instructions from a Pantry bucket.
+        base_prompt = f"""
+        You are the Melius Operarius AI Programmer. Your goal is to build and maintain a professional website based on Pantry instructions.
         
-        QUALITY GUIDELINES:
-        - Use modern, responsive CSS (Flexbox/Grid).
-        - Ensure accessible color contrast and clean typography.
-        - Create interactive elements with smooth transitions.
-        - For multi-page sites, create separate HTML files for each page.
-        - Use a shared 'styles.css' and 'script.js' for consistency.
+        CRITICAL SYNC RULE:
+        Compare the current website files with the Pantry instructions. If ANY page mentioned in the Pantry is missing, or if the content/theme/strict_text does not match EXACTLY, you MUST set "needs_update": true and provide the full content for those files.
         
-        STRICT ADHERENCE:
-        - 'strict_text' MUST be used exactly as provided. No modifications.
-        - 'theme' colors must be applied precisely.
-        - AI can only improve user content for better presentation (e.g. columns, cards).
+        QUALITY & DESIGN:
+        - Modern, responsive CSS (Flexbox/Grid).
+        - Shared 'styles.css' and 'script.js'.
+        - Separate HTML files for each page.
         
-        MODULAR COMPONENTS:
-        - For special tags ({form}, {countdown}, etc.), create clean, blank-white modular components in the code.
-        - These components should be styled in CSS so they can be easily customized by the user later.
+        STRICT GUIDELINES:
+        - 'strict_text' MUST be used word-for-word. No changes.
+        - 'theme' colors must be applied to the CSS.
+        - Special tags ({form}, {countdown}, etc.) must be implemented as modular, blank-white components.
         
         FORM HANDLING:
-        - IMPORTANT: Before adding a {form}, you MUST instruct the system to create a new Pantry bucket.
-        - Use the 'request_new_form_bucket' field in your response.
-        - Once you have the bucket name, link the form to POST data to: https://getpantry.cloud/apiv1/pantry/[PANTRY_ID]/basket/[BUCKET_NAME]
+        - If adding a {form}, first check the "forms_registry" provided. If the form_id is missing, request a new bucket via 'request_new_form_bucket'.
+        - Once you have the bucket name, link the form to POST data to: https://getpantry.cloud/apiv1/pantry/{self.pantry_id}/basket/[BUCKET_NAME]
         """
 
         system_prompt = f"""
@@ -106,7 +102,6 @@ class MeliusOperarius:
         
         DATE: {current_date}
         IS NEW YEAR: {is_new_year}
-        PANTRY_ID: {self.pantry_id}
         
         PANTRY INSTRUCTIONS:
         {json.dumps(instructions, indent=2)}
@@ -121,7 +116,7 @@ class MeliusOperarius:
             {{ "form_id": "unique_id", "description": "Form purpose" }}
           ],
           "modifications": [
-            {{ "path": "path/to/file", "description": "detailed sync reason", "type": "edit/new", "content": "Full content for new or updated file" }}
+            {{ "path": "path/to/file", "description": "sync reason", "type": "edit/new", "content": "Full content for new or updated file" }}
           ]
         }}
         """
@@ -132,11 +127,13 @@ class MeliusOperarius:
             print(f"AI failed to generate plan: {e}")
             return
         
+        # 1. Handle New Form Bucket Requests
         new_form_requests = plan.get("request_new_form_bucket", [])
         if new_form_requests:
             forms_registry = self.get_pantry_data("melius_forms") or {"forms": []}
             existing_ids = [f["form_id"] for f in forms_registry["forms"]]
             
+            new_buckets_created = False
             for req in new_form_requests:
                 if req["form_id"] not in existing_ids:
                     bucket_name = f"form_{req['form_id']}_{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}"
@@ -146,20 +143,28 @@ class MeliusOperarius:
                         "created_at": datetime.datetime.now().isoformat()
                     })
                     self.post_pantry_data(bucket_name, {"submissions": []})
+                    new_buckets_created = True
             
-            self.post_pantry_data("melius_forms", forms_registry)
-            instructions["forms_registry"] = forms_registry
-            system_prompt += f"\n\nUPDATED FORMS REGISTRY: {json.dumps(forms_registry)}"
-            plan = self.client.chat(system_prompt)
+            if new_buckets_created:
+                self.post_pantry_data("melius_forms", forms_registry)
+                # Re-run AI with the bucket names
+                instructions["forms_registry"] = forms_registry
+                system_prompt_retry = system_prompt + f"\n\nUPDATED FORMS REGISTRY: {json.dumps(forms_registry)}"
+                try:
+                    plan = self.client.chat(system_prompt_retry)
+                except Exception as e:
+                    print(f"AI failed on retry: {e}")
+                    return
 
         if not plan.get("needs_update", False):
             print("Website is synchronized with Pantry.")
             return
 
+        # 2. Execute Modifications
         for mod in plan.get("modifications", []):
             content = mod.get("content")
             if content:
-                self.write_file(mod["path"], content)
-                print(f"Applied {mod['type']}: {mod['path']}")
+                if self.write_file(mod["path"], content):
+                    print(f"Applied {mod['type']}: {mod['path']}")
 
         print("Melius Operarius sync complete.")
