@@ -76,6 +76,7 @@ class MeliusOperarius:
         current_date = datetime.datetime.now().strftime("%Y-%m-%d")
         is_new_year = "01-01" in current_date or "12-31" in current_date
         
+        # Use double braces to escape them in the f-string
         base_prompt = f"""
         You are the Melius Operarius AI Programmer. Your goal is to build and maintain a professional website based on Pantry instructions.
         
@@ -90,10 +91,10 @@ class MeliusOperarius:
         STRICT GUIDELINES:
         - 'strict_text' MUST be used word-for-word. No changes.
         - 'theme' colors must be applied to the CSS.
-        - Special tags ({form}, {countdown}, etc.) must be implemented as modular, blank-white components.
+        - Special tags ({{{{form}}}}, {{{{countdown}}}}, etc.) must be implemented as modular, blank-white components.
         
         FORM HANDLING:
-        - If adding a {form}, first check the "forms_registry" provided. If the form_id is missing, request a new bucket via 'request_new_form_bucket'.
+        - If adding a {{{{form}}}}, first check the "forms_registry" provided. If the form_id is missing, request a new bucket via 'request_new_form_bucket'.
         - Once you have the bucket name, link the form to POST data to: https://getpantry.cloud/apiv1/pantry/{self.pantry_id}/basket/[BUCKET_NAME]
         """
 
@@ -109,7 +110,7 @@ class MeliusOperarius:
         CURRENT WEBSITE FILES:
         {json.dumps(file_contents, indent=2)}
 
-        OUTPUT FORMAT (JSON):
+        OUTPUT FORMAT (STRICT JSON ONLY, NO MARKDOWN):
         {{
           "needs_update": true/false,
           "request_new_form_bucket": [
