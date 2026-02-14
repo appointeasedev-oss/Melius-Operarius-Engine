@@ -13,10 +13,10 @@ class LLMClient:
         self.api_keys = [k for k in self.api_keys if k]
         
         self.models = [
-            "qwen/qwen-2.5-72b-instruct:free",
-            "google/gemini-2.0-flash-exp:free",
-            "google/gemini-2.0-pro-exp-02-05:free",
-            "deepseek/deepseek-chat:free",
+            "arcee-ai/trinity-large-preview:free",
+            "qwen/qwen3-next-80b-a3b-instruct:free",
+            "qwen/qwen3-coder:free",
+            "meta-llama/llama-3.3-70b-instruct:free",
             "meta-llama/llama-3.1-8b-instruct:free",
             "mistralai/mistral-7b-instruct:free"
         ]
