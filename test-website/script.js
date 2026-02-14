@@ -49,26 +49,52 @@ function initializeCountdown() {
 }
 
 function initializeForm() {
-    const form = document.getElementById('registrationForm');
-    
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
+    const formTags = document.querySelectorAll('[data-form]');
+    formTags.forEach(formTag => {
+        const formHTML = createFormHTML(JSON.parse(formTag.dataset.form));
+        formTag.innerHTML = formHTML;
         
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-        
-        // Submit to Pantry bucket
-        submitFormData(data);
-        
-        // Show success message
-        showFormSuccess();
-        
-        // Reset form
-        form.reset();
+        const form = formTag.querySelector('form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            // Submit to Pantry bucket
+            submitFormData(data, formTag);
+            
+            // Show success message
+            showFormSuccess(formTag);
+            
+            // Reset form
+            form.reset();
+        });
     });
 }
 
-function submitFormData(data) {
+function createFormHTML(formConfig) {
+    const fields = formConfig.fields.split(' ').map(field => field.trim());
+    let formHTML = `<form id="registrationForm">`;
+    
+    fields.forEach(field => {
+        const label = field.charAt(0).toUpperCase() + field.slice(1);
+        formHTML += `
+            <div class="form-group">
+                <label for="${field}">${label}:</label>
+                <input type="${field === 'email' ? 'email' : 'text'}" id="${field}" name="${field}" required>
+            </div>
+        `;
+    });
+    
+    formHTML += `
+        <button type="submit">Submit</button>
+    </form>`;
+    
+    return formHTML;
+}
+
+function submitFormData(data, formTag) {
     const bucketName = 'form_New Part Opening Registration_20260214045853';
     const url = `https://getpantry.cloud/apiv1/pantry/b391bcb8-2ca8-4e11-9a5d-8b13a0f8b906/basket/${bucketName}`;
     
@@ -94,12 +120,11 @@ function submitFormData(data) {
     .catch(error => {
         console.error('Error submitting form:', error);
         // Show error message to user
-        showFormError('Failed to submit form. Please try again.');
+        showFormError(formTag, 'Failed to submit form. Please try again.');
     });
 }
 
-function showFormSuccess() {
-    const form = document.getElementById('registrationForm');
+function showFormSuccess(formTag) {
     const successMessage = document.createElement('div');
     successMessage.style.cssText = `
         background: rgba(249, 115, 22, 0.2);
@@ -111,15 +136,14 @@ function showFormSuccess() {
         margin-top: 1rem;
     `;
     successMessage.textContent = 'Thank you for registering! We will contact you soon.';
-    form.parentNode.insertBefore(successMessage, form.nextSibling);
+    formTag.parentNode.insertBefore(successMessage, formTag.nextSibling);
     
     setTimeout(() => {
         successMessage.remove();
     }, 5000);
 }
 
-function showFormError(message) {
-    const form = document.getElementById('registrationForm');
+function showFormError(formTag, message) {
     const errorMessage = document.createElement('div');
     errorMessage.style.cssText = `
         background: rgba(220, 38, 38, 0.2);
@@ -131,7 +155,7 @@ function showFormError(message) {
         margin-top: 1rem;
     `;
     errorMessage.textContent = message;
-    form.parentNode.insertBefore(errorMessage, form.nextSibling);
+    formTag.parentNode.insertBefore(errorMessage, formTag.nextSibling);
     
     setTimeout(() => {
         errorMessage.remove();
@@ -139,15 +163,18 @@ function showFormError(message) {
 }
 
 function initializeLiveTime() {
-    const timeElement = document.getElementById('currentTime');
-    
-    function updateTime() {
-        const now = new Date();
-        timeElement.textContent = `Current time: ${now.toLocaleString()}`;
-    }
-    
-    updateTime();
-    setInterval(updateTime, 1000);
+    const liveTimeElements = document.querySelectorAll('[data-live-time]');
+    liveTimeElements.forEach(element => {
+        element.id = 'currentTime';
+        
+        function updateTime() {
+            const now = new Date();
+            element.textContent = `Current time: ${now.toLocaleString()}`;
+        }
+        
+        updateTime();
+        setInterval(updateTime, 1000);
+    });
 }
 
 function initializeProductBanners() {
@@ -177,38 +204,15 @@ function processSpecialTags() {
     
     // Process forms
     const formTags = document.querySelectorAll('[data-form]');
-    formTags.forEach(formTag => {
-        const formHTML = createFormHTML(JSON.parse(formTag.dataset.form));
-        formTag.innerHTML = formHTML;
-    });
+    if (formTags.length > 0) {
+        initializeForm();
+    }
     
     // Process live time
     const liveTimeElements = document.querySelectorAll('[data-live-time]');
-    liveTimeElements.forEach(element => {
-        element.id = 'currentTime';
+    if (liveTimeElements.length > 0) {
         initializeLiveTime();
-    });
-}
-
-function createFormHTML(formConfig) {
-    const fields = formConfig.fields.split(' ').map(field => field.trim());
-    let formHTML = `<form id="registrationForm">`;
-    
-    fields.forEach(field => {
-        const label = field.charAt(0).toUpperCase() + field.slice(1);
-        formHTML += `
-            <div class="form-group">
-                <label for="${field}">${label}:</label>
-                <input type="${field === 'email' ? 'email' : 'text'}" id="${field}" name="${field}" required>
-            </div>
-        `;
-    });
-    
-    formHTML += `
-        <button type="submit">Submit</button>
-    </form>`;
-    
-    return formHTML;
+    }
 }
 
 // Add countdown styles
