@@ -7,11 +7,17 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize live time display
     initializeLiveTime();
+    
+    // Initialize product banners
+    initializeProductBanners();
+    
+    // Process special tags
+    processSpecialTags();
 });
 
 function initializeCountdown() {
     const countdownElement = document.getElementById('countdown');
-    const targetDate = new Date('2026-06-01T00:00:00Z');
+    const targetDate = new Date('2026-03-01T00:00:00Z');
     
     function updateCountdown() {
         const now = new Date();
@@ -144,6 +150,67 @@ function initializeLiveTime() {
     setInterval(updateTime, 1000);
 }
 
+function initializeProductBanners() {
+    const productBanners = document.querySelectorAll('[data-product-banner]');
+    
+    productBanners.forEach(banner => {
+        const data = JSON.parse(banner.dataset.productBanner);
+        const productHTML = `
+            <article class="product-item">
+                <img src="${data.image}" alt="${data.name}">
+                <h3>${data.name}</h3>
+                <p class="price">$${data.price}</p>
+                <p>${data.description || 'High-quality industrial component'}</p>
+                <a href="mailto:${data.contact}" class="contact-link">Contact Sales</a>
+            </article>
+        `;
+        banner.innerHTML = productHTML;
+    });
+}
+
+function processSpecialTags() {
+    // Process product banners
+    const productBannerTags = document.querySelectorAll('[data-product-banner]');
+    if (productBannerTags.length > 0) {
+        initializeProductBanners();
+    }
+    
+    // Process forms
+    const formTags = document.querySelectorAll('[data-form]');
+    formTags.forEach(formTag => {
+        const formHTML = createFormHTML(JSON.parse(formTag.dataset.form));
+        formTag.innerHTML = formHTML;
+    });
+    
+    // Process live time
+    const liveTimeElements = document.querySelectorAll('[data-live-time]');
+    liveTimeElements.forEach(element => {
+        element.id = 'currentTime';
+        initializeLiveTime();
+    });
+}
+
+function createFormHTML(formConfig) {
+    const fields = formConfig.fields.split(' ').map(field => field.trim());
+    let formHTML = `<form id="registrationForm">`;
+    
+    fields.forEach(field => {
+        const label = field.charAt(0).toUpperCase() + field.slice(1);
+        formHTML += `
+            <div class="form-group">
+                <label for="${field}">${label}:</label>
+                <input type="${field === 'email' ? 'email' : 'text'}" id="${field}" name="${field}" required>
+            </div>
+        `;
+    });
+    
+    formHTML += `
+        <button type="submit">Submit</button>
+    </form>`;
+    
+    return formHTML;
+}
+
 // Add countdown styles
 const style = document.createElement('style');
 style.textContent = `
@@ -161,6 +228,96 @@ style.textContent = `
         padding: 0.5rem 1rem;
         border-radius: 5px;
         font-weight: bold;
+    }
+    
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+    }
+    
+    .product-item {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 1.5rem;
+        background: white;
+        text-align: center;
+    }
+    
+    .product-item img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+    
+    .product-item h3 {
+        margin-bottom: 0.5rem;
+    }
+    
+    .product-item .price {
+        color: #f97316;
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .contact-link {
+        display: inline-block;
+        background: #f97316;
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        margin-top: 1rem;
+    }
+    
+    .contact-link:hover {
+        background: #dc4d13;
+    }
+    
+    .contact-form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+    
+    .form-group input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+    
+    .form-group input:focus {
+        outline: none;
+        border-color: #f97316;
+    }
+    
+    button[type="submit"] {
+        background: #f97316;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+    
+    button[type="submit"]:hover {
+        background: #dc4d13;
     }
 `;
 document.head.appendChild(style);
