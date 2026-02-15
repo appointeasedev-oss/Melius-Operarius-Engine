@@ -325,5 +325,12 @@ style.textContent = `
     button[type="submit"]:hover {
         background: #dc4d13;
     }
+    
+    #currentTime {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-top: 1rem;
+        color: #f97316;
+    }
 `;
 document.head.appendChild(style);
