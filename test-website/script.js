@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeCountdown() {
-    const countdownElement = document.getElementById('countdown');
+    const countdownPlaceholders = document.querySelectorAll('.countdown-placeholder');
     const targetDate = new Date('2026-03-01T00:00:00Z');
     
     function updateCountdown() {
@@ -24,7 +24,7 @@ function initializeCountdown() {
         const diff = targetDate - now;
         
         if (diff <= 0) {
-            countdownElement.textContent = 'Event Started!';
+            countdownPlaceholders.forEach(el => el.textContent = 'Event Started!');
             return;
         }
         
@@ -33,15 +33,17 @@ function initializeCountdown() {
         const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((diff % (1000 * 60)) / 1000);
         
-        countdownElement.innerHTML = `
-            <div>Opening in:</div>
-            <div class="countdown-numbers">
-                <span>${days}d</span>
-                <span>${hours}h</span>
-                <span>${minutes}m</span>
-                <span>${seconds}s</span>
-            </div>
-        `;
+        countdownPlaceholders.forEach(el => {
+            el.innerHTML = `
+                <div>Opening in:</div>
+                <div class="countdown-numbers">
+                    <span>${days}d</span>
+                    <span>${hours}h</span>
+                    <span>${minutes}m</span>
+                    <span>${seconds}s</span>
+                </div>
+            `;
+        });
     }
     
     updateCountdown();
