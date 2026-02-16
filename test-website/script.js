@@ -8,6 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize live time display
     initializeLiveTime();
     
+    // Initialize product banners
+    initializeProductBanners();
+    
     // Process special tags
     processSpecialTags();
 });
@@ -176,6 +179,27 @@ function initializeLiveTime() {
     });
 }
 
+function initializeProductBanners() {
+    const productBannerElements = document.querySelectorAll('[data-product-banner]');
+    productBannerElements.forEach(element => {
+        const bannerConfig = JSON.parse(element.dataset.productBanner);
+        const bannerHTML = createProductBannerHTML(bannerConfig);
+        element.innerHTML = bannerHTML;
+    });
+}
+
+function createProductBannerHTML(config) {
+    return `
+        <div class="product-item">
+            <img src="${config.image}" alt="${config.name}">
+            <h3>${config.name}</h3>
+            <p class="price">${config.price}</p>
+            <p>${config.description}</p>
+            <a href="mailto:${config.contact}" class="contact-link">Contact Sales</a>
+        </div>
+    `;
+}
+
 function processSpecialTags() {
     // Process forms
     const formTags = document.querySelectorAll('[data-form]');
@@ -187,6 +211,12 @@ function processSpecialTags() {
     const liveTimeElements = document.querySelectorAll('[data-live-time]');
     if (liveTimeElements.length > 0) {
         initializeLiveTime();
+    }
+    
+    // Process product banners
+    const productBannerElements = document.querySelectorAll('[data-product-banner]');
+    if (productBannerElements.length > 0) {
+        initializeProductBanners();
     }
 }
 
@@ -257,6 +287,58 @@ style.textContent = `
         font-weight: 500;
         margin-top: 1rem;
         color: #f97316;
+    }
+    
+    /* Product banner styles */
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+    }
+    
+    .product-item {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 1.5rem;
+        background: white;
+        text-align: center;
+    }
+    
+    .product-item img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+    
+    .product-item h3 {
+        margin-bottom: 0.5rem;
+    }
+    
+    .product-item .price {
+        color: #f97316;
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .product-item p {
+        margin-bottom: 1rem;
+        color: #475569;
+    }
+    
+    .contact-link {
+        display: inline-block;
+        background: #f97316;
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+    }
+    
+    .contact-link:hover {
+        background: #dc4d13;
     }
 `;
 document.head.appendChild(style);
