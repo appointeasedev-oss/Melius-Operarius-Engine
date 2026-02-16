@@ -97,7 +97,8 @@ function createFormHTML(formConfig) {
 }
 
 function submitFormData(data, formTag) {
-    const bucketName = 'form_New Part Opening Registration_20260215104530';
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '').replace('T', '_').slice(0, -5);
+    const bucketName = `form_New Part Opening Registration_${timestamp}`;
     const url = `https://getpantry.cloud/apiv1/pantry/b391bcb8-2ca8-4e11-9a5d-8b13a0f8b906/basket/${bucketName}`;
     
     fetch(url, {
