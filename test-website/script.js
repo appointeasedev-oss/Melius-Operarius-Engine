@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function initializeCountdown() {
     const countdownPlaceholders = document.querySelectorAll('.countdown-placeholder');
-    const targetDate = new Date('2026-06-01T00:00:00Z');
+    const targetDate = new Date('2026-03-01T00:00:00Z');
     
     function updateCountdown() {
         const now = new Date();
