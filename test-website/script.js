@@ -181,8 +181,8 @@ function initializeLiveTime() {
 }
 
 function initializeProductBanners() {
-    const productBannerElements = document.querySelectorAll('[data-product-banner]');
-    productBannerElements.forEach(element => {
+    const productBannerPlaceholders = document.querySelectorAll('[data-product-banner]');
+    productBannerPlaceholders.forEach(element => {
         const bannerConfig = JSON.parse(element.dataset.productBanner);
         const bannerHTML = createProductBannerHTML(bannerConfig);
         element.innerHTML = bannerHTML;
