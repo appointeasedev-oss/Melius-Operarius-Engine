@@ -129,15 +129,7 @@ function submitFormData(data, formTag) {
 
 function showFormSuccess(formTag) {
     const successMessage = document.createElement('div');
-    successMessage.style.cssText = `
-        background: rgba(249, 115, 22, 0.2);
-        border: 1px solid #f97316;
-        color: #f97316;
-        padding: 1rem;
-        border-radius: 5px;
-        text-align: center;
-        margin-top: 1rem;
-    `;
+    successMessage.className = 'form-message';
     successMessage.textContent = 'Thank you for registering! We will contact you soon.';
     formTag.parentNode.insertBefore(successMessage, formTag.nextSibling);
     
@@ -148,15 +140,7 @@ function showFormSuccess(formTag) {
 
 function showFormError(formTag, message) {
     const errorMessage = document.createElement('div');
-    errorMessage.style.cssText = `
-        background: rgba(220, 38, 38, 0.2);
-        border: 1px solid #dc2626;
-        color: #dc2626;
-        padding: 1rem;
-        border-radius: 5px;
-        text-align: center;
-        margin-top: 1rem;
-    `;
+    errorMessage.className = 'form-message error';
     errorMessage.textContent = message;
     formTag.parentNode.insertBefore(errorMessage, formTag.nextSibling);
     
@@ -221,125 +205,37 @@ function processSpecialTags() {
     }
 }
 
-// Add countdown styles
+// Add additional styles dynamically
 const style = document.createElement('style');
 style.textContent = `
-    .countdown-numbers {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-top: 0.5rem;
-    }
-    
-    .countdown-numbers span {
-        background: rgba(249, 115, 22, 0.2);
-        border: 1px solid #f97316;
-        color: #f97316;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        font-weight: bold;
-    }
-    
-    .contact-form {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 2rem;
-    }
-    
-    .form-group {
-        margin-bottom: 1rem;
-    }
-    
-    .form-group label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-    }
-    
-    .form-group input {
-        width: 100%;
-        padding: 0.5rem;
-        border: 1px solid #e2e8f0;
-        border-radius: 5px;
-        font-size: 1rem;
-    }
-    
-    .form-group input:focus {
-        outline: none;
-        border-color: #f97316;
-    }
-    
-    button[type="submit"] {
-        background: #f97316;
-        color: white;
-        border: none;
-        padding: 0.75rem 1.5rem;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1rem;
-    }
-    
-    button[type="submit"]:hover {
-        background: #dc4d13;
-    }
-    
-    #currentTime {
-        font-size: 1.2rem;
-        font-weight: 500;
-        margin-top: 1rem;
-        color: #f97316;
-    }
-    
-    /* Product banner styles */
-    .product-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-        padding: 2rem;
-    }
-    
-    .product-item {
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 1.5rem;
-        background: white;
-        text-align: center;
-    }
-    
-    .product-item img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-        margin-bottom: 1rem;
-    }
-    
-    .product-item h3 {
-        margin-bottom: 0.5rem;
-    }
-    
-    .product-item .price {
-        color: #f97316;
-        font-weight: bold;
-        font-size: 1.2rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .product-item p {
-        margin-bottom: 1rem;
-        color: #475569;
-    }
-    
     .contact-link {
         display: inline-block;
-        background: #f97316;
+        background: var(--primary-color);
         color: white;
         text-decoration: none;
         padding: 0.5rem 1rem;
         border-radius: 5px;
+        margin-top: 1rem;
     }
     
     .contact-link:hover {
         background: #dc4d13;
+    }
+    
+    .form-message {
+        background: rgba(249, 115, 22, 0.2);
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
+        padding: 1rem;
+        border-radius: 5px;
+        text-align: center;
+        margin-top: 1rem;
+    }
+    
+    .form-message.error {
+        background: rgba(220, 38, 38, 0.2);
+        border-color: #dc2626;
+        color: #dc2626;
     }
 `;
 document.head.appendChild(style);
