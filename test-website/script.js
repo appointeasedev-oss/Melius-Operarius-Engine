@@ -212,7 +212,7 @@ style.textContent = `
         display: inline-block;
         background: var(--primary-color);
         color: white;
-        text-decoration: none;
+        text-decoration: no
         padding: 0.5rem 1rem;
         border-radius: 5px;
         margin-top: 1rem;
