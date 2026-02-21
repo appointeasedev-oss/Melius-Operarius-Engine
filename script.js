@@ -24,7 +24,7 @@ function initializeCountdown() {
         const diff = targetDate - now;
         
         if (diff <= 0) {
-            countdownPlaceholders.forEach(el => el.textContent = 'Event Started!');
+            countdownPlaceholders.forEach(el => el.innerHTML = '<div>Event Started!</div>');
             return;
         }
         
