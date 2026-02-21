@@ -16,25 +16,26 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeCountdown() {
-    const countdownPlaceholders = document.querySelectorAll('.countdown-placeholder');
-    const targetDate = new Date('2026-03-01T00:00:00Z');
-    
-    function updateCountdown() {
-        const now = new Date();
-        const diff = targetDate - now;
+    const countdownPlaceholders = document.querySelectorAll('[data-countdown]');
+    countdownPlaceholders.forEach(placeholder => {
+        const config = JSON.parse(placeholder.dataset.countdown);
+        const targetDate = new Date(config.target_date);
         
-        if (diff <= 0) {
-            countdownPlaceholders.forEach(el => el.innerHTML = '<div>Event Started!</div>');
-            return;
-        }
-        
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        
-        countdownPlaceholders.forEach(el => {
-            el.innerHTML = `
+        function updateCountdown() {
+            const now = new Date();
+            const diff = targetDate - now;
+            
+            if (diff <= 0) {
+                placeholder.innerHTML = '<div>Event Started!</div>';
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            placeholder.innerHTML = `
                 <div>Opening in:</div>
                 <div class="countdown-numbers">
                     <span>${days}d</span>
@@ -43,11 +44,11 @@ function initializeCountdown() {
                     <span>${seconds}s</span>
                 </div>
             `;
-        });
-    }
-    
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+        }
+        
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    });
 }
 
 function initializeForm() {
@@ -203,6 +204,12 @@ function processSpecialTags() {
     const productBannerElements = document.querySelectorAll('[data-product-banner]');
     if (productBannerElements.length > 0) {
         initializeProductBanners();
+    }
+    
+    // Process countdown
+    const countdownElements = document.querySelectorAll('[data-countdown]');
+    if (countdownElements.length > 0) {
+        initializeCountdown();
     }
 }
 
