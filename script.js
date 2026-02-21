@@ -53,7 +53,8 @@ function initializeCountdown() {
 function initializeForm() {
     const formTags = document.querySelectorAll('[data-form]');
     formTags.forEach(formTag => {
-        const formHTML = createFormHTML(JSON.parse(formTag.dataset.form));
+        const formConfig = JSON.parse(formTag.dataset.form);
+        const formHTML = createFormHTML(formConfig);
         formTag.innerHTML = formHTML;
         
         const form = formTag.querySelector('form');
@@ -64,7 +65,7 @@ function initializeForm() {
             const data = Object.fromEntries(formData);
             
             // Submit to Pantry bucket
-            submitFormData(data, formTag);
+            submitFormData(data, formTag, formConfig.form_id);
             
             // Show success message
             showFormSuccess(formTag);
@@ -77,7 +78,7 @@ function initializeForm() {
 
 function createFormHTML(formConfig) {
     const fields = formConfig.fields.split(' ').map(field => field.trim());
-    let formHTML = `<form id="registrationForm" style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">`;
+    let formHTML = `<form id="${formConfig.form_id.replace(/\s+/g, '_')}" style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">`;
     
     fields.forEach(field => {
         const label = field.charAt(0).toUpperCase() + field.slice(1);
@@ -96,9 +97,9 @@ function createFormHTML(formConfig) {
     return formHTML;
 }
 
-function submitFormData(data, formTag) {
+function submitFormData(data, formTag, formId) {
     const timestamp = new Date().toISOString().replace(/[:.]/g, '').replace('T', '_').slice(0, -5);
-    const bucketName = `form_New Part Opening Registration_${timestamp}`;
+    const bucketName = `form_${formId.replace(/\s+/g, '_')}_${timestamp}`;
     const url = `https://getpantry.cloud/apiv1/pantry/b391bcb8-2ca8-4e11-9a5d-8b13a0f8b906/basket/${bucketName}`;
     
     fetch(url, {
