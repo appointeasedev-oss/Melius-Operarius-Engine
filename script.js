@@ -16,26 +16,25 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializeCountdown() {
-    const countdownPlaceholders = document.querySelectorAll('[data-countdown]');
-    countdownPlaceholders.forEach(placeholder => {
-        const config = JSON.parse(placeholder.dataset.countdown);
-        const targetDate = new Date(config.target_date);
+    const countdownPlaceholders = document.querySelectorAll('.countdown-placeholder');
+    const targetDate = new Date('2026-03-01T00:00:00Z');
+    
+    function updateCountdown() {
+        const now = new Date();
+        const diff = targetDate - now;
         
-        function updateCountdown() {
-            const now = new Date();
-            const diff = targetDate - now;
-            
-            if (diff <= 0) {
-                placeholder.innerHTML = '<div>Event Started!</div>';
-                return;
-            }
-            
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            placeholder.innerHTML = `
+        if (diff <= 0) {
+            countdownPlaceholders.forEach(el => el.textContent = 'Event Started!');
+            return;
+        }
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        countdownPlaceholders.forEach(el => {
+            el.innerHTML = `
                 <div>Opening in:</div>
                 <div class="countdown-numbers">
                     <span>${days}d</span>
@@ -44,18 +43,17 @@ function initializeCountdown() {
                     <span>${seconds}s</span>
                 </div>
             `;
-        }
-        
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-    });
+        });
+    }
+    
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
 }
 
 function initializeForm() {
     const formTags = document.querySelectorAll('[data-form]');
     formTags.forEach(formTag => {
-        const formConfig = JSON.parse(formTag.dataset.form);
-        const formHTML = createFormHTML(formConfig);
+        const formHTML = createFormHTML(JSON.parse(formTag.dataset.form));
         formTag.innerHTML = formHTML;
         
         const form = formTag.querySelector('form');
@@ -66,7 +64,7 @@ function initializeForm() {
             const data = Object.fromEntries(formData);
             
             // Submit to Pantry bucket
-            submitFormData(data, formTag, formConfig.form_id);
+            submitFormData(data, formTag);
             
             // Show success message
             showFormSuccess(formTag);
@@ -98,9 +96,9 @@ function createFormHTML(formConfig) {
     return formHTML;
 }
 
-function submitFormData(data, formTag, formId) {
+function submitFormData(data, formTag) {
     const timestamp = new Date().toISOString().replace(/[:.]/g, '').replace('T', '_').slice(0, -5);
-    const bucketName = `form_${formId.replace(/\s+/g, '_')}_${timestamp}`;
+    const bucketName = `form_${formTag.querySelector('form').id}_${timestamp}`;
     const url = `https://getpantry.cloud/apiv1/pantry/b391bcb8-2ca8-4e11-9a5d-8b13a0f8b906/basket/${bucketName}`;
     
     fetch(url, {
@@ -207,7 +205,7 @@ function processSpecialTags() {
     }
     
     // Process countdown
-    const countdownElements = document.querySelectorAll('[data-countdown]');
+    const countdownElements = document.querySelectorAll('.countdown-placeholder');
     if (countdownElements.length > 0) {
         initializeCountdown();
     }
