@@ -203,12 +203,6 @@ function processSpecialTags() {
     if (productBannerElements.length > 0) {
         initializeProductBanners();
     }
-    
-    // Process countdown
-    const countdownElements = document.querySelectorAll('.countdown-placeholder');
-    if (countdownElements.length > 0) {
-        initializeCountdown();
-    }
 }
 
 // Add additional styles dynamically
