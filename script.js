@@ -1,59 +1,27 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize countdown timer
-    initializeCountdown();
-    
-    // Initialize form handling
-    initializeForm();
-    
-    // Initialize live time display
-    initializeLiveTime();
-    
-    // Initialize product banners
-    initializeProductBanners();
-    
     // Process special tags
     processSpecialTags();
 });
 
-function initializeCountdown() {
-    const countdownPlaceholders = document.querySelectorAll('.countdown-placeholder');
-    const targetDate = new Date('2026-03-01T00:00:00Z');
+function processSpecialTags() {
+    // Process countdown tags
+    const countdownTags = document.querySelectorAll('[data-countdown]');
+    countdownTags.forEach(tag => {
+        const targetDate = new Date(tag.dataset.countdown);
+        const countdownHTML = createCountdownHTML(targetDate);
+        tag.innerHTML = countdownHTML;
+        
+        // Update countdown every second
+        setInterval(() => {
+            tag.innerHTML = createCountdownHTML(targetDate);
+        }, 1000);
+    });
     
-    function updateCountdown() {
-        const now = new Date();
-        const diff = targetDate - now;
-        
-        if (diff <= 0) {
-            countdownPlaceholders.forEach(el => el.textContent = 'Event Started!');
-            return;
-        }
-        
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        
-        countdownPlaceholders.forEach(el => {
-            el.innerHTML = `
-                <div>Opening in:</div>
-                <div class="countdown-numbers">
-                    <span>${days}d</span>
-                    <span>${hours}h</span>
-                    <span>${minutes}m</span>
-                    <span>${seconds}s</span>
-                </div>
-            `;
-        });
-    }
-    
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-}
-
-function initializeForm() {
+    // Process form tags
     const formTags = document.querySelectorAll('[data-form]');
     formTags.forEach(formTag => {
-        const formHTML = createFormHTML(JSON.parse(formTag.dataset.form));
+        const formConfig = JSON.parse(formTag.dataset.form);
+        const formHTML = createFormHTML(formConfig);
         formTag.innerHTML = formHTML;
         
         const form = formTag.querySelector('form');
@@ -73,6 +41,45 @@ function initializeForm() {
             form.reset();
         });
     });
+    
+    // Process live time tags
+    const liveTimeElements = document.querySelectorAll('[data-live-time]');
+    liveTimeElements.forEach(element => {
+        updateTime(element);
+        setInterval(() => updateTime(element), 1000);
+    });
+    
+    // Process product banner tags
+    const productBannerElements = document.querySelectorAll('[data-product-banner]');
+    productBannerElements.forEach(element => {
+        const bannerConfig = JSON.parse(element.dataset.productBanner);
+        const bannerHTML = createProductBannerHTML(bannerConfig);
+        element.innerHTML = bannerHTML;
+    });
+}
+
+function createCountdownHTML(targetDate) {
+    const now = new Date();
+    const diff = targetDate - now;
+    
+    if (diff <= 0) {
+        return '<div>Event Started!</div>';
+    }
+    
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    return `
+        <div>Opening in:</div>
+        <div class="countdown-numbers">
+            <span>${days}d</span>
+            <span>${hours}h</span>
+            <span>${minutes}m</span>
+            <span>${seconds}s</span>
+        </div>
+    `;
 }
 
 function createFormHTML(formConfig) {
@@ -149,28 +156,9 @@ function showFormError(formTag, message) {
     }, 5000);
 }
 
-function initializeLiveTime() {
-    const liveTimeElements = document.querySelectorAll('[data-live-time]');
-    liveTimeElements.forEach(element => {
-        element.id = 'currentTime';
-        
-        function updateTime() {
-            const now = new Date();
-            element.textContent = `Current time: ${now.toLocaleString()}`;
-        }
-        
-        updateTime();
-        setInterval(updateTime, 1000);
-    });
-}
-
-function initializeProductBanners() {
-    const productBannerElements = document.querySelectorAll('[data-product-banner]');
-    productBannerElements.forEach(element => {
-        const bannerConfig = JSON.parse(element.dataset.productBanner);
-        const bannerHTML = createProductBannerHTML(bannerConfig);
-        element.innerHTML = bannerHTML;
-    });
+function updateTime(element) {
+    const now = new Date();
+    element.textContent = `Current time: ${now.toLocaleString()}`;
 }
 
 function createProductBannerHTML(config) {
@@ -185,32 +173,28 @@ function createProductBannerHTML(config) {
     `;
 }
 
-function processSpecialTags() {
-    // Process forms
-    const formTags = document.querySelectorAll('[data-form]');
-    if (formTags.length > 0) {
-        initializeForm();
-    }
-    
-    // Process live time
-    const liveTimeElements = document.querySelectorAll('[data-live-time]');
-    if (liveTimeElements.length > 0) {
-        initializeLiveTime();
-    }
-    
-    // Process product banners
-    const productBannerElements = document.querySelectorAll('[data-product-banner]');
-    if (productBannerElements.length > 0) {
-        initializeProductBanners();
-    }
-}
-
 // Add additional styles dynamically
 const style = document.createElement('style');
 style.textContent = `
+    .countdown-numbers {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 0.5rem;
+    }
+    
+    .countdown-numbers span {
+        background: rgba(249, 115, 22, 0.2);
+        border: 1px solid #f97316;
+        color: #f97316;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    
     .contact-link {
         display: inline-block;
-        background: var(--primary-color);
+        background: #f97316;
         color: white;
         text-decoration: none;
         padding: 0.5rem 1rem;
@@ -224,8 +208,8 @@ style.textContent = `
     
     .form-message {
         background: rgba(249, 115, 22, 0.2);
-        border: 1px solid var(--primary-color);
-        color: var(--primary-color);
+        border: 1px solid #f97316;
+        color: #f97316;
         padding: 1rem;
         border-radius: 5px;
         text-align: center;
