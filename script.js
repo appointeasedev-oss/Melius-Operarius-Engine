@@ -221,5 +221,52 @@ style.textContent = `
         border-color: #dc2626;
         color: #dc2626;
     }
+    
+    .product-banner {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .product-banner img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+    
+    .product-banner h3 {
+        margin-bottom: 0.5rem;
+        color: #475569;
+    }
+    
+    .product-banner .price {
+        color: #f97316;
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .product-banner p {
+        margin-bottom: 1rem;
+        color: #475569;
+    }
+    
+    .product-banner a {
+        display: inline-block;
+        background: #f97316;
+        color: white;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        margin-top: 1rem;
+    }
+    
+    .product-banner a:hover {
+        background: #dc4d13;
+    }
 `;
 document.head.appendChild(style);
