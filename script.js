@@ -176,22 +176,6 @@ function createProductBannerHTML(config) {
 // Add additional styles dynamically
 const style = document.createElement('style');
 style.textContent = `
-    .countdown-numbers {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-top: 0.5rem;
-    }
-    
-    .countdown-numbers span {
-        background: rgba(249, 115, 22, 0.2);
-        border: 1px solid #f97316;
-        color: #f97316;
-        padding: 0.5rem 1rem;
-        border-radius: 5px;
-        font-weight: bold;
-    }
-    
     .contact-link {
         display: inline-block;
         background: #f97316;
