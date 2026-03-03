@@ -178,7 +178,7 @@ const style = document.createElement('style');
 style.textContent = `
     .contact-link {
         display: inline-block;
-        background: #f97316;
+        background: var(--primary-color);
         color: white;
         text-decoration: none;
         padding: 0.5rem 1rem;
@@ -192,8 +192,8 @@ style.textContent = `
     
     .form-message {
         background: rgba(249, 115, 22, 0.2);
-        border: 1px solid #f97316;
-        color: #f97316;
+        border: 1px solid var(--primary-color);
+        color: var(--primary-color);
         padding: 1rem;
         border-radius: 5px;
         text-align: center;
