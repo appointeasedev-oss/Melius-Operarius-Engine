@@ -1,0 +1,12 @@
+name: Show Secret
+
+on:
+  workflow_dispatch:
+
+jobs:
+  show-secret:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Echo PANTRY_ID
+        run: echo "PANTRY_ID=${{ secrets.PANTRY_ID }}"
