@@ -1,8 +1,8 @@
 :root {
-    --primary-color: #f97316;
-    --secondary-color: #475569;
-    --background-color: #0f172a;
-    --text-color: #f8fafc;
+    --primary-color: #dc2626;
+    --secondary-color: #ef4444;
+    --background-color: #ffffff;
+    --text-color: #111827;
     --font-main: 'Inter', system-ui, sans-serif;
 }
 
@@ -200,7 +200,7 @@ footer p {
 }
 
 .countdown-numbers span {
-    background: rgba(249, 115, 22, 0.2);
+    background: rgba(220, 38, 38, 0.2);
     border: 1px solid var(--primary-color);
     color: var(--primary-color);
     padding: 0.5rem 1rem;
@@ -210,7 +210,7 @@ footer p {
 
 /* Form success/error message styles */
 .form-message {
-    background: rgba(249, 115, 22, 0.2);
+    background: rgba(220, 38, 38, 0.2);
     border: 1px solid var(--primary-color);
     color: var(--primary-color);
     padding: 1rem;
@@ -248,7 +248,7 @@ footer p {
 }
 
 .product-banner .price {
-    color: #f97316;
+    color: #dc2626;
     font-weight: bold;
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
@@ -261,7 +261,7 @@ footer p {
 
 .product-banner a {
     display: inline-block;
-    background: #f97316;
+    background: #dc2626;
     color: white;
     text-decoration: none;
     padding: 0.5rem 1rem;
@@ -270,7 +270,7 @@ footer p {
 }
 
 .product-banner a:hover {
-    background: #dc4d13;
+    background: #b91c1c;
 }
 
 /* Responsive adjustments */
