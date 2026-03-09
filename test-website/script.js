@@ -90,7 +90,7 @@ function createFormHTML(formConfig) {
     });
     
     formHTML += `
-        <button type="submit" style="background: #f97316; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 1rem;">Submit</button>
+        <button type="submit" style="background: #dc2626; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 1rem;">Submit</button>
     </form>`;
     
     return formHTML;
@@ -178,9 +178,9 @@ function createProductBannerHTML(config) {
         <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin-bottom: 1rem; text-align: center;">
             <img src="${config.image}" alt="${config.name}" style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 1rem;">
             <h3 style="margin-bottom: 0.5rem; color: #475569;">${config.name}</h3>
-            <p style="color: #f97316; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.5rem;">${config.price}</p>
+            <p style="color: #dc2626; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.5rem;">${config.price}</p>
             <p style="margin-bottom: 1rem; color: #475569;">${config.description}</p>
-            <a href="mailto:${config.contact}" style="display: inline-block; background: #f97316; color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 5px; margin-top: 1rem;">Contact Sales</a>
+            <a href="mailto:${config.contact}" style="display: inline-block; background: #dc2626; color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 5px; margin-top: 1rem;">Contact Sales</a>
         </div>
     `;
 }
