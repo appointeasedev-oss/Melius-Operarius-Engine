@@ -212,7 +212,7 @@ style.textContent = `
         display: inline-block;
         background: linear-gradient(135deg, #2d86fb 0%, #633af8 100%);
         color: white;
-        text-decoration: none;
+        text-decoration: no
         padding: 0.5rem 1rem;
         border-radius: 5px;
         margin-top: 1rem;
