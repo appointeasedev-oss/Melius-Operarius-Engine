@@ -1,8 +1,8 @@
 :root {
-    --primary-color: #eebd68;
-    --secondary-color: #f8733a;
+    --primary-color: #2d86fb;
+    --secondary-color: #633af8;
     --background-color: #ffffff;
-    --text-color: #ffa424;
+    --text-color: #00fffb;
     --font-main: 'Inter', system-ui, sans-serif;
 }
 
@@ -200,7 +200,7 @@ footer p {
 }
 
 .countdown-numbers span {
-    background: rgba(238, 189, 104, 0.2);
+    background: rgba(45, 134, 251, 0.2);
     border: 1px solid var(--primary-color);
     color: var(--primary-color);
     padding: 0.5rem 1rem;
@@ -210,7 +210,7 @@ footer p {
 
 /* Form success/error message styles */
 .form-message {
-    background: rgba(248, 115, 58, 0.2);
+    background: rgba(99, 58, 248, 0.2);
     border: 1px solid var(--secondary-color);
     color: var(--secondary-color);
     padding: 1rem;
