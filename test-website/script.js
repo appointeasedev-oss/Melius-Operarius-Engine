@@ -83,14 +83,14 @@ function createFormHTML(formConfig) {
         const label = field.charAt(0).toUpperCase() + field.slice(1);
         formHTML += `
             <div style="margin-bottom: 1rem;">
-                <label for="${field}" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #475569;">${label}:</label>
+                <label for="${field}" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #ffa424;">${label}:</label>
                 <input type="${field === 'email' ? 'email' : 'text'}" id="${field}" name="${field}" required style="width: 100%; padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 5px; font-size: 1rem; background: #f8fafc; color: #0f172a;">
             </div>
         `;
     });
     
     formHTML += `
-        <button type="submit" style="background: #dc2626; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 1rem;">Submit</button>
+        <button type="submit" style="background: #f8733a; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 1rem;">Submit</button>
     </form>`;
     
     return formHTML;
@@ -129,7 +129,7 @@ function submitFormData(data, formTag) {
 
 function showFormSuccess(formTag) {
     const successMessage = document.createElement('div');
-    successMessage.style.cssText = 'background: rgba(249, 115, 22, 0.2); border: 1px solid #f97316; color: #f97316; padding: 1rem; border-radius: 5px; text-align: center; margin-top: 1rem;';
+    successMessage.style.cssText = 'background: rgba(248, 115, 58, 0.2); border: 1px solid #f8733a; color: #f8733a; padding: 1rem; border-radius: 5px; text-align: center; margin-top: 1rem;';
     successMessage.textContent = 'Thank you for registering! We will contact you soon.';
     formTag.parentNode.insertBefore(successMessage, formTag.nextSibling);
     
@@ -177,10 +177,10 @@ function createProductBannerHTML(config) {
     return `
         <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin-bottom: 1rem; text-align: center;">
             <img src="${config.image}" alt="${config.name}" style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 1rem;">
-            <h3 style="margin-bottom: 0.5rem; color: #475569;">${config.name}</h3>
-            <p style="color: #dc2626; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.5rem;">${config.price}</p>
+            <h3 style="margin-bottom: 0.5rem; color: #f8733a;">${config.name}</h3>
+            <p style="color: #eebd68; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.5rem;">${config.price}</p>
             <p style="margin-bottom: 1rem; color: #475569;">${config.description}</p>
-            <a href="mailto:${config.contact}" style="display: inline-block; background: #dc2626; color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 5px; margin-top: 1rem;">Contact Sales</a>
+            <a href="mailto:${config.contact}" style="display: inline-block; background: #f8733a; color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 5px; margin-top: 1rem;">Contact Sales</a>
         </div>
     `;
 }
@@ -223,9 +223,9 @@ style.textContent = `
     }
     
     .form-message {
-        background: rgba(249, 115, 22, 0.2);
-        border: 1px solid var(--primary-color);
-        color: var(--primary-color);
+        background: rgba(248, 115, 58, 0.2);
+        border: 1px solid var(--secondary-color);
+        color: var(--secondary-color);
         padding: 1rem;
         border-radius: 5px;
         text-align: center;
