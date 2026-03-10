@@ -90,7 +90,7 @@ function createFormHTML(formConfig) {
     });
     
     formHTML += `
-        <button type="submit" style="background: linear-gradient(135deg, #f8733a 0%, #e74242 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 1rem; box-shadow: 0 4px 15px rgba(248, 115, 58, 0.3);">Submit</button>
+        <button type="submit" style="background: linear-gradient(135deg, #f8733a 0%, #e74442 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 1rem; box-shadow: 0 4px 15px rgba(248, 115, 58, 0.3);">Submit</button>
     </form>`;
     
     return formHTML;
@@ -180,7 +180,7 @@ function createProductBannerHTML(config) {
             <h3 style="margin-bottom: 0.5rem; color: #f8733a;">${config.name}</h3>
             <p style="color: #eebd68; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.5rem;">${config.price}</p>
             <p style="margin-bottom: 1rem; color: #ffffff; opacity: 0.8;">${config.description}</p>
-            <a href="mailto:${config.contact}" style="display: inline-block; background: linear-gradient(135deg, #f8733a 0%, #e74242 100%); color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 5px; margin-top: 1rem; box-shadow: 0 4px 15px rgba(248, 115, 58, 0.3);">Contact Sales</a>
+            <a href="mailto:${config.contact}" style="display: inline-block; background: linear-gradient(135deg, #f8733a 0%, #e74442 100%); color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 5px; margin-top: 1rem; box-shadow: 0 4px 15px rgba(248, 115, 58, 0.3);">Contact Sales</a>
         </div>
     `;
 }
