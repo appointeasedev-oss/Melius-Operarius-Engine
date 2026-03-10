@@ -248,6 +248,51 @@ footer p {
     margin: 1rem 0;
 }
 
+/* Industrial design enhancements */
+body {
+    background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+    color: #ffffff;
+}
+
+.header-content h1 {
+    color: #2d86fb;
+    text-shadow: 0 0 20px rgba(45, 134, 251, 0.5);
+}
+
+.hero h2 {
+    color: #2d86fb;
+    text-shadow: 0 0 20px rgba(45, 134, 251, 0.5);
+}
+
+.product-item {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(45, 134, 251, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.product-item h3 {
+    color: #633af8;
+}
+
+.form-group input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(45, 134, 251, 0.3);
+    color: #ffffff;
+}
+
+.form-group input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+button[type="submit"] {
+    background: linear-gradient(135deg, #2d86fb 0%, #633af8 100%);
+}
+
+footer {
+    background: rgba(45, 134, 251, 0.1);
+    border-top: 1px solid rgba(45, 134, 251, 0.3);
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .header-content h1 {

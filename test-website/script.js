@@ -77,20 +77,20 @@ function initializeForm() {
 
 function createFormHTML(formConfig) {
     const fields = formConfig.fields.split(' ').map(field => field.trim());
-    let formHTML = `<form id="${formConfig.form_id.replace(/\s+/g, '_')}" style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">`;
+    let formHTML = `<form id="${formConfig.form_id.replace(/\s+/g, '_')}" style="background: rgba(255, 255, 255, 0.1); padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); backdrop-filter: blur(10px);">`;
     
     fields.forEach(field => {
         const label = field.charAt(0).toUpperCase() + field.slice(1);
         formHTML += `
             <div style="margin-bottom: 1rem;">
                 <label for="${field}" style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: #ffa424;">${label}:</label>
-                <input type="${field === 'email' ? 'email' : 'text'}" id="${field}" name="${field}" required style="width: 100%; padding: 0.5rem; border: 1px solid #e2e8f0; border-radius: 5px; font-size: 1rem; background: #f8fafc; color: #0f172a;">
+                <input type="${field === 'email' ? 'email' : 'text'}" id="${field}" name="${field}" required style="width: 100%; padding: 0.5rem; border: 1px solid rgba(45, 134, 251, 0.3); border-radius: 5px; font-size: 1rem; background: rgba(255, 255, 255, 0.1); color: #ffffff; backdrop-filter: blur(10px);">
             </div>
         `;
     });
     
     formHTML += `
-        <button type="submit" style="background: #f8733a; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 1rem;">Submit</button>
+        <button type="submit" style="background: linear-gradient(135deg, #f8733a 0%, #e74242 100%); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 1rem; box-shadow: 0 4px 15px rgba(248, 115, 58, 0.3);">Submit</button>
     </form>`;
     
     return formHTML;
@@ -175,12 +175,12 @@ function initializeProductBanners() {
 
 function createProductBannerHTML(config) {
     return `
-        <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin-bottom: 1rem; text-align: center;">
+        <div style="background: rgba(255, 255, 255, 0.1); padding: 1.5rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); backdrop-filter: blur(10px); margin-bottom: 1rem; text-align: center;">
             <img src="${config.image}" alt="${config.name}" style="max-width: 100%; height: auto; border-radius: 8px; margin-bottom: 1rem;">
             <h3 style="margin-bottom: 0.5rem; color: #f8733a;">${config.name}</h3>
             <p style="color: #eebd68; font-weight: bold; font-size: 1.2rem; margin-bottom: 0.5rem;">${config.price}</p>
-            <p style="margin-bottom: 1rem; color: #475569;">${config.description}</p>
-            <a href="mailto:${config.contact}" style="display: inline-block; background: #f8733a; color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 5px; margin-top: 1rem;">Contact Sales</a>
+            <p style="margin-bottom: 1rem; color: #ffffff; opacity: 0.8;">${config.description}</p>
+            <a href="mailto:${config.contact}" style="display: inline-block; background: linear-gradient(135deg, #f8733a 0%, #e74242 100%); color: white; text-decoration: none; padding: 0.5rem 1rem; border-radius: 5px; margin-top: 1rem; box-shadow: 0 4px 15px rgba(248, 115, 58, 0.3);">Contact Sales</a>
         </div>
     `;
 }
@@ -210,22 +210,24 @@ const style = document.createElement('style');
 style.textContent = `
     .contact-link {
         display: inline-block;
-        background: var(--primary-color);
+        background: linear-gradient(135deg, #2d86fb 0%, #633af8 100%);
         color: white;
         text-decoration: none;
         padding: 0.5rem 1rem;
         border-radius: 5px;
         margin-top: 1rem;
+        box-shadow: 0 4px 15px rgba(45, 134, 251, 0.3);
     }
     
     .contact-link:hover {
-        background: #dc4d13;
+        background: linear-gradient(135deg, #dc4d13 0%, #c53030 100%);
+        box-shadow: 0 4px 15px rgba(220, 77, 19, 0.4);
     }
     
     .form-message {
         background: rgba(248, 115, 58, 0.2);
-        border: 1px solid var(--secondary-color);
-        color: var(--secondary-color);
+        border: 1px solid #f8733a;
+        color: #f8733a;
         padding: 1rem;
         border-radius: 5px;
         text-align: center;
@@ -236,6 +238,15 @@ style.textContent = `
         background: rgba(220, 38, 38, 0.2);
         border-color: #dc2626;
         color: #dc2626;
+    }
+    
+    .product-item {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .product-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
     }
 `;
 document.head.appendChild(style);
