@@ -30,7 +30,7 @@ function initializeCountdown() {
             }
             
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 00 * 60 * 60));
             const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((diff % (1000 * 60)) / 1000);
             
@@ -212,7 +212,7 @@ style.textContent = `
         display: inline-block;
         background: linear-gradient(135deg, #2d86fb 0%, #633af8 100%);
         color: white;
-        text-decoration: no
+        text-decoration: none;
         padding: 0.5rem 1rem;
         border-radius: 5px;
         margin-top: 1rem;
