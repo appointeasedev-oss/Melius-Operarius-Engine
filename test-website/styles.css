@@ -1,8 +1,8 @@
 :root {
-    --primary-color: #dc2626;
-    --secondary-color: #ef4444;
+    --primary-color: #0ea5e9;
+    --secondary-color: #38bdf8;
     --background-color: #ffffff;
-    --text-color: #111827;
+    --text-color: #1e3a8a;
     --font-main: 'Inter', system-ui, sans-serif;
 }
 
@@ -177,7 +177,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background: #dc4d13;
+    background: #0c7ca0;
 }
 
 footer {
@@ -200,7 +200,7 @@ footer p {
 }
 
 .countdown-numbers span {
-    background: rgba(220, 38, 38, 0.2);
+    background: rgba(14, 165, 233, 0.2);
     border: 1px solid var(--primary-color);
     color: var(--primary-color);
     padding: 0.5rem 1rem;
