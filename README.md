@@ -23,7 +23,8 @@ Melius Operarius is an AI-driven website management engine that operates based o
 2. **Environment Variables**:
    - `PANTRY_ID`: Your Pantry ID.
    - `OPENROUTER_API_KEY_1`: Your primary API key for OpenRouter.
-3. **Pantry Structure**: Initialize a basket named `melius_instructions` with the structure defined in `PANTRY_STRUCTURE.md`.
+3. **Pantry Structure**: Initialize a basket named `melius_instructions` and one with 'melius_forms' with the structure defined in `PANTRY_STRUCTURE.md`.
+4. **How to use**: Log in with you pantry id in [https://melius-operarius-control.vercel.app] to get started.
 
 ## 📂 Project Structure
 
