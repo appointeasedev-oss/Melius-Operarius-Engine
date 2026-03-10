@@ -225,6 +225,29 @@ footer p {
     color: #dc2626;
 }
 
+/* Special tag component styles */
+[data-countdown] {
+    display: inline-block;
+    margin: 0;
+}
+
+[data-form] {
+    margin: 2rem 0;
+}
+
+[data-live-time] {
+    margin: 2rem 0;
+    padding: 1rem;
+    background: rgba(45, 134, 251, 0.1);
+    border: 1px solid var(--primary-color);
+    border-radius: 8px;
+    text-align: center;
+}
+
+[data-product-banner] {
+    margin: 1rem 0;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .header-content h1 {
