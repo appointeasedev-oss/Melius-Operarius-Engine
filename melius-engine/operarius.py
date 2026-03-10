@@ -11,6 +11,7 @@ class MeliusOperarius:
         self.pantry_id = os.getenv("PANTRY_ID")
         self.base_url = f"https://getpantry.cloud/apiv1/pantry/{self.pantry_id}/basket"
         self.exclude_dirs = ["melius-engine", ".git", "history", "log", "to-do", "error", ".github", "node_modules"]
+        self.target_folder = os.path.join(self.root_dir, "test-website")  # <-- Only modify this folder
         
     def get_pantry_data(self, basket_name):
         if not self.pantry_id:
@@ -34,7 +35,7 @@ class MeliusOperarius:
     def get_all_files(self):
         all_files = []
         file_contents = {}
-        for root, dirs, files in os.walk(self.root_dir):
+        for root, dirs, files in os.walk(self.target_folder):  # <-- Walk only test-website
             dirs[:] = [d for d in dirs if d not in self.exclude_dirs]
             for file in files:
                 rel_path = os.path.relpath(os.path.join(root, file), self.root_dir)
@@ -53,6 +54,10 @@ class MeliusOperarius:
 
     def write_file(self, file_path, content):
         ui_extensions = [".tsx", ".css", ".html", ".js", ".ts", ".jsx"]
+        # <-- Only write inside test-website
+        if not file_path.startswith("test-website/"):
+            print(f"Skipped writing outside test-website: {file_path}")
+            return False
         if not any(file_path.endswith(ext) for ext in ui_extensions):
             return False
             
@@ -76,7 +81,6 @@ class MeliusOperarius:
         current_date = datetime.datetime.now().strftime("%Y-%m-%d")
         is_new_year = "01-01" in current_date or "12-31" in current_date
         
-        # Use double braces to escape them in the f-string
         base_prompt = f"""
         You are the Melius Operarius AI Programmer. Your goal is to build and maintain a professional website based on Pantry instructions.
         
@@ -128,7 +132,6 @@ class MeliusOperarius:
             print(f"AI failed to generate plan: {e}")
             return
         
-        # 1. Handle New Form Bucket Requests
         new_form_requests = plan.get("request_new_form_bucket", [])
         if new_form_requests:
             forms_registry = self.get_pantry_data("melius_forms") or {"forms": []}
@@ -148,7 +151,6 @@ class MeliusOperarius:
             
             if new_buckets_created:
                 self.post_pantry_data("melius_forms", forms_registry)
-                # Re-run AI with the bucket names
                 instructions["forms_registry"] = forms_registry
                 system_prompt_retry = system_prompt + f"\n\nUPDATED FORMS REGISTRY: {json.dumps(forms_registry)}"
                 try:
@@ -161,7 +163,6 @@ class MeliusOperarius:
             print("Website is synchronized with Pantry.")
             return
 
-        # 2. Execute Modifications
         for mod in plan.get("modifications", []):
             content = mod.get("content")
             if content:
