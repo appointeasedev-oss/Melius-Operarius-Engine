@@ -83,6 +83,14 @@ class MeliusOperarius:
         
         base_prompt = f"""
         You are the Melius Operarius AI Programmer. Your goal is to build and maintain a professional website based on Pantry instructions.
+        FILE SYSTEM RULES:
+- ALL files MUST be created or edited ONLY inside the folder: test-website/
+- Every path MUST start with: test-website/
+- Example valid paths:
+  test-website/index.html
+  test-website/styles.css
+  test-website/script.js
+- NEVER reference files outside this directory.
         
         CRITICAL SYNC RULE:
         Compare the current website files with the Pantry instructions. If ANY page mentioned in the Pantry is missing, or if the content/theme/strict_text does not match EXACTLY, you MUST set "needs_update": true and provide the full content for those files.
