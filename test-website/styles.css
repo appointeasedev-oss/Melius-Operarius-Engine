@@ -1,8 +1,8 @@
 :root {
-    --primary-color: #2d86fb;
-    --secondary-color: #633af8;
-    --background-color: #ffffff;
-    --text-color: #00fffb;
+    --primary-color: #3b82f6;
+    --secondary-color: #1e40af;
+    --background-color: #0f172a;
+    --text-color: #f8fafc;
     --font-main: 'Inter', system-ui, sans-serif;
 }
 
@@ -94,92 +94,6 @@ body {
     max-width: 800px;
 }
 
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 2rem;
-}
-
-.product-item {
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 1.5rem;
-    background: white;
-    text-align: center;
-}
-
-.product-item img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-}
-
-.product-item h3 {
-    margin-bottom: 0.5rem;
-    color: var(--secondary-color);
-}
-
-.product-item .price {
-    color: var(--primary-color);
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-}
-
-.product-item p {
-    margin-bottom: 1rem;
-    color: #475569;
-}
-
-.contact-form {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-.form-group {
-    margin-bottom: 1rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--text-color);
-}
-
-.form-group input {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #e2e8f0;
-    border-radius: 5px;
-    font-size: 1rem;
-    background: white;
-    color: var(--text-color);
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-}
-
-button[type="submit"] {
-    background: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-top: 1rem;
-}
-
-button[type="submit"]:hover {
-    background: #dc4d13;
-}
-
 footer {
     padding: 2rem;
     text-align: center;
@@ -191,63 +105,6 @@ footer p {
     color: var(--text-color);
 }
 
-/* Countdown timer styles */
-.countdown-numbers {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 0.5rem;
-}
-
-.countdown-numbers span {
-    background: rgba(45, 134, 251, 0.2);
-    border: 1px solid var(--primary-color);
-    color: var(--primary-color);
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-/* Form success/error message styles */
-.form-message {
-    background: rgba(99, 58, 248, 0.2);
-    border: 1px solid var(--secondary-color);
-    color: var(--secondary-color);
-    padding: 1rem;
-    border-radius: 5px;
-    text-align: center;
-    margin-top: 1rem;
-}
-
-.form-message.error {
-    background: rgba(220, 38, 38, 0.2);
-    border-color: #dc2626;
-    color: #dc2626;
-}
-
-/* Special tag component styles */
-[data-countdown] {
-    display: inline-block;
-    margin: 0;
-}
-
-[data-form] {
-    margin: 2rem 0;
-}
-
-[data-live-time] {
-    margin: 2rem 0;
-    padding: 1rem;
-    background: rgba(45, 134, 251, 0.1);
-    border: 1px solid var(--primary-color);
-    border-radius: 8px;
-    text-align: center;
-}
-
-[data-product-banner] {
-    margin: 1rem 0;
-}
-
 /* Industrial design enhancements */
 body {
     background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
@@ -255,42 +112,13 @@ body {
 }
 
 .header-content h1 {
-    color: #2d86fb;
-    text-shadow: 0 0 20px rgba(45, 134, 251, 0.5);
+    color: #3b82f6;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
 }
 
 .hero h2 {
-    color: #2d86fb;
-    text-shadow: 0 0 20px rgba(45, 134, 251, 0.5);
-}
-
-.product-item {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(45, 134, 251, 0.3);
-    backdrop-filter: blur(10px);
-}
-
-.product-item h3 {
-    color: #633af8;
-}
-
-.form-group input {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(45, 134, 251, 0.3);
-    color: #ffffff;
-}
-
-.form-group input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
-}
-
-button[type="submit"] {
-    background: linear-gradient(135deg, #2d86fb 0%, #633af8 100%);
-}
-
-footer {
-    background: rgba(45, 134, 251, 0.1);
-    border-top: 1px solid rgba(45, 134, 251, 0.3);
+    color: #3b82f6;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
 }
 
 /* Responsive adjustments */
@@ -301,24 +129,5 @@ footer {
     
     .hero h2 {
         font-size: 1.8rem;
-    }
-    
-    .product-grid {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-    }
-    
-    .contact-form {
-        padding: 1rem;
-    }
-    
-    .countdown-numbers {
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-    
-    .countdown-numbers span {
-        padding: 0.3rem 0.8rem;
-        font-size: 0.9rem;
     }
 }
