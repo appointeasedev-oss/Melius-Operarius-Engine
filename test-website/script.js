@@ -1,1 +1,1 @@
-// No special functionality needed for home page
+// Home page script - no special functionality needed
