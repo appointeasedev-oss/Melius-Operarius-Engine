@@ -26,7 +26,7 @@ body {
 }
 
 #main-nav {
-    padding: 2rem 2rem 1rem;
+    padding: 1rem 2rem;
     background: var(--background-color);
     border-bottom: 1px solid var(--secondary-color);
 }
@@ -47,7 +47,7 @@ body {
     color: var(--primary-color);
 }
 
-.hero {
+.main-content {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -58,33 +58,47 @@ body {
     background: var(--background-color);
 }
 
-.hero h2 {
+.main-content h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     color: var(--primary-color);
 }
 
-.hero p {
+.main-content p {
     margin-bottom: 2rem;
     color: var(--text-color);
     font-size: 1.1rem;
     max-width: 800px;
 }
 
-/* Industrial design enhancements */
+/* Industrial & modern enhancements */
 body {
     background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
-    color: #ffffff;
 }
 
-.hero h2 {
+.main-content h2 {
     color: #3b82f6;
-    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+    text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+/* Template placeholder style */
+.template-container {
+    background: #ffffff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .hero h2 {
+    .main-content h2 {
         font-size: 1.8rem;
+    }
+    #main-nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #main-nav ul {
+        flex-wrap: wrap;
     }
 }
